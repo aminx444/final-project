@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Commande</title>
+    <link rel="stylesheet" href="messtyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+    <script src="controles1.js"></script>
+</head>
+<body id="bb">
+    <h1 id="ti">Commande</h1>
+   
+    <form id="commandeForm" action="facteur.html" method="get" onsubmit="return sauvegarderCommande()">
+        <fieldset>
+            <legend>Veuillez remplir le formulaire pour commander</legend>
+            
+            <label for="nomPrenom">Nom et Prénom :</label><br>
+            <input type="text" id="nomPrenom" name="nomPrenom" required><br><br>
+        
+            <label for="adresse">Adresse :</label><br>
+            <input type="text" id="adresse" name="adresse" required><br><br>
+        
+            <label for="choi">choix :</label><br>
+            <select id="menu" name="menu" required>
+                <option selected="choisir un pc" disabled>choisir le pc</option>
+                <option value="pc gamer 1"id="">pc gamer 1</option>
+                <option value="pc gamer 2" id="">pc gamer 2</option>
+                <option value="pc gamer 3" id="">pc gamer 3</option>
+                <option value="pc gamer 4"id="">pc gamer 4</option>
+                <option value="pc gamer 5"id="">pc gamer 5</option>
+                <option value="pc gamer 6"id="">pc gamer 6</option>
+                <option value="pc gamer 7"id="">pc gamer 7</option>
+                <option value="pc gamer 8"id="">pc gamer 8</option>
+                <option value="pc gamer 9"id="">pc gamer 9</option>
+                <option value="pc gamer 10"id="">pc gamer 10</option>
+            </select><br><br>
+        
+            <label for="quantite">Quantité :</label><br>
+            <input type="number" id="quantite" name="quantite" min="1" required><br><br>
+        
+            <input type="submit" value="Envoyer">
+            <button type="button" onclick="annuler()">Annuler</button>
+        </fieldset>
+    </form>
+
+    <script>
+        
+        function sauvegarderCommande() {
+            const nomPrenom = document.getElementById("nomPrenom").value;
+            const adresse = document.getElementById("adresse").value;
+            const menu = document.getElementById("menu").value;
+            const quantite = document.getElementById("quantite").value;
+
+            
+            const prixPlats = {
+                "pc gamer 1": 1799,
+                "pc gamer 2": 7000,
+                "pc gamer 3": 11999,
+                "pc gamer 4": 4000,
+                "pc gamer 5": 2500,
+                "pc gamer 6": 1499,
+                "pc gamer 7": 7000,
+                "pc gamer 8": 4999,
+                "pc gamer 9": 8000,
+                "pc gamer 10": 2500
+
+
+
+            };
+
+            const prixTotal = prixPlats[menu] * quantite;
+
+            
+            localStorage.setItem("commande", JSON.stringify({
+                nomPrenom: nomPrenom,
+                adresse: adresse,
+                menu: menu,
+                quantite: quantite,
+                prixTotal: prixTotal
+            }));
+            
+            return true;
+        }
+        
+        
+        function annuler() {
+            document.getElementById("commandeForm").reset();
+        }
+    </script>
+</body>
+</html>
